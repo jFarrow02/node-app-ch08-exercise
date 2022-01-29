@@ -14,6 +14,7 @@ pipeline {
             steps {
                 script {
                     echo "running unit tests..."
+                    sh "npm install"
                     sh "npm run test"
                 }
             }
