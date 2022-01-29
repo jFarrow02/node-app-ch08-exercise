@@ -26,8 +26,10 @@ pipeline {
         stage("test") {
             steps {
                 echo "running unit tests..."
-                sh "npm install"
-                sh "npm run test"
+                dir("app") {
+                    sh "npm install"
+                    sh "npm run test"
+                }
             }
         }
         // stage("test") {
