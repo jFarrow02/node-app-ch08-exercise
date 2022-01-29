@@ -14,43 +14,46 @@ pipeline {
             steps {
                 script {
                     echo "installing dependencies..."
-                    sh 'npm install'
-                }
-            }
-        }
-        
-        stage("test") {
-            steps {
-                script {
-                    echo "running unit tests..."
-                    sh "npm run test"
+                    dir("app") {
+                        sh 'npm install'
+                    }
+                    
                 }
             }
         }
 
-        stage("build image") {
-            steps {
-                script {
-                    echo "building image..."
-                    sh "npm package"
-                }
-            }
-        }
+        // stage("test") {
+        //     steps {
+        //         script {
+        //             echo "running unit tests..."
+        //             sh "npm run test"
+        //         }
+        //     }
+        // }
 
-        stage("push image to nexus") {
-            steps {
-                script {
-                    echo "pushing image to nexus..."
-                }
-            }
-        }
+        // stage("build image") {
+        //     steps {
+        //         script {
+        //             echo "building image..."
+        //             sh "npm package"
+        //         }
+        //     }
+        // }
 
-        stage("commit version increment") {
-            steps {
-                script {
-                    echo "committing version increment..."
-                }
-            }
-        }
+        // stage("push image to nexus") {
+        //     steps {
+        //         script {
+        //             echo "pushing image to nexus..."
+        //         }
+        //     }
+        // }
+
+        // stage("commit version increment") {
+        //     steps {
+        //         script {
+        //             echo "committing version increment..."
+        //         }
+        //     }
+        // }
     }
 }
