@@ -14,6 +14,7 @@ pipeline {
             steps {
                 script {
                     echo "running unit tests..."
+                    sh "npm run test"
                 }
             }
         }
@@ -22,6 +23,7 @@ pipeline {
             steps {
                 script {
                     echo "building image..."
+                    sh "npm package"
                 }
             }
         }
