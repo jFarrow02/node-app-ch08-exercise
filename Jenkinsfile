@@ -16,17 +16,13 @@ pipeline {
                     echo "installing dependencies..."
                     dir("app") {
                         sh 'npm install'
+                        sh "npm run test"
                     }
                     
                 }
             }
         }
 
-        stage("test") {
-            steps {
-                sh "npm run test"
-            }
-        }
         // stage("test") {
         //     steps {
         //         script {
