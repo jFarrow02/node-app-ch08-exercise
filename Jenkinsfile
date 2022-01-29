@@ -10,11 +10,19 @@ pipeline {
             }
         }
 
+        stage("install dependencies") {
+            steps {
+                script {
+                    echo "installing dependencies..."
+                    sh 'npm install'
+                }
+            }
+        }
+        
         stage("test") {
             steps {
                 script {
                     echo "running unit tests..."
-                    sh "npm install"
                     sh "npm run test"
                 }
             }
