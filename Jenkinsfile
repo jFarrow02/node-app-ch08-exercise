@@ -70,7 +70,7 @@ pipeline {
                         sh "git config --global user.email 'jack.dempsey.farrow@gmail.com'"
                         sh "git config --global user.name 'Jenkins Admin'"
 
-                        sh "git remote set-url origin https://${USR}:${PWD}@github.com/jFarrow02/node-app-ch08-exercise.git"
+                        sh 'git remote set-url origin https://${USR}:${PWD}@github.com/jFarrow02/node-app-ch08-exercise.git'
                         sh "git add ."
                         sh 'git commit -m"ci: version bump"'
                         sh "git push origin HEAD:${BRANCH_NAME}"
