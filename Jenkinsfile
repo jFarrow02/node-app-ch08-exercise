@@ -9,14 +9,14 @@ pipeline {
                         echo "incrementing version..."
                         def metadata = readJSON file: 'package.json'
                         def metadataAsList = metadata["version"].split("\\.")
-                        echo metadataAsList[0]
-                        // def major = metadataAsList[0]
-                        // def minor = metadataAsList[1]
-                        // def patch = metadataAsList[2]
-                        // // echo metadata["version"]
-                        // echo "major: ${major}"
-                        // echo "minor: ${minor}"
-                        // echo "patch: ${patch}"
+                        
+                        def major = metadataAsList[0]
+                        def minor = metadataAsList[1]
+                        def patch = metadataAsList[2]
+
+                        echo "major: ${major}"
+                        echo "minor: ${minor}"
+                        echo "patch: ${patch}"
                     }
                 }
             }
