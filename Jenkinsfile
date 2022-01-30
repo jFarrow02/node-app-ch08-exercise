@@ -50,13 +50,11 @@ pipeline {
        stage("build image") {
             steps {
                 script {
-                    dir("app") {
-                        echo "building image..."
-                        withCredentials([usernamePassword(credentialsId: "nexus-creds", usernameVariable: "USR", passwordVariable: "PWD")]) {
-                            sh "docker build -t $NEW_IMAGE ."
-                            sh "echo $PWD docker login -u $USR --password-stdin $ARTIFACT_REPO:$ARTIFACT_REPO_PORT"
-                            sh "docker push $NEW_IMAGE $ARTIFACT_REPO"
-                        }
+                    echo "building image..."
+                    withCredentials([usernamePassword(credentialsId: "nexus-creds", usernameVariable: "USR", passwordVariable: "PWD")]) {
+                        sh "docker build -t $NEW_IMAGE ."
+                        sh "echo $PWD docker login -u $USR --password-stdin $ARTIFACT_REPO:$ARTIFACT_REPO_PORT"
+                        sh "docker push $NEW_IMAGE $ARTIFACT_REPO"
                     }
                 }
             }
