@@ -14,9 +14,16 @@ pipeline {
                         def minor = metadataAsList[1]
                         def patch = metadataAsList[2]
 
-                        echo "major: ${major}"
-                        echo "minor: ${minor}"
-                        echo "patch: ${patch}"
+                        // echo "major: ${major}"
+                        // echo "minor: ${minor}"
+                        // echo "patch: ${patch}"
+
+                        def incremented = Integer.parseInt(minor)
+                        incremented++
+
+                        def newVersion = "${major}.${incremented}.${patch}"
+
+                        echo "newVersion: ${newVersion}"
                     }
                 }
             }
