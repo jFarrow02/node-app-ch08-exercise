@@ -6,6 +6,8 @@ pipeline {
             steps {
                 script {
                     echo "incrementing version..."
+                    def metadata = readJSON file: 'package.json'
+                    echo metadata
                 }
             }
         }
