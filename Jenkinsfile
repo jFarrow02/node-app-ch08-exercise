@@ -25,6 +25,7 @@ pipeline {
                         incremented++
 
                         NEW_VERSION = "${major}.${incremented}.${patch}"
+                        sh "npm version ${NEW_VERSION}"
                         NEW_IMAGE = "${ARTIFACT_REPO}:${ARTIFACT_REPO_PORT}/${appName}:${NEW_VERSION}"
 
                         echo "NEW_IMAGE: ${NEW_IMAGE}"
