@@ -5,9 +5,11 @@ pipeline {
         stage("increment version") {
             steps {
                 script {
-                    echo "incrementing version..."
-                    def metadata = readJSON file: 'package.json'
-                    echo metadata
+                    dir("app") {
+                        echo "incrementing version..."
+                        def metadata = readJSON file: 'package.json'
+                        echo metadata
+                    }
                 }
             }
         }
