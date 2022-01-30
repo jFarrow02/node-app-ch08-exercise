@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        NEW_VERSION = ""
+        NEW_IMAGE = ""
+        ARTIFACT_REPO = "54.242.242.46"
+        ARTIFACT_REPO_PORT = "8083"
+    }
     stages {
         stage("increment version") {
             steps {
@@ -8,22 +14,20 @@ pipeline {
                     dir("app") {
                         echo "incrementing version..."
                         def metadata = readJSON file: 'package.json'
-                        def metadataAsList = metadata["version"].split("\\.")
+                        def versionAsList = metadata["version"].split("\\.")
+                        def appName = metadata["name"]
                         
-                        def major = metadataAsList[0]
-                        def minor = metadataAsList[1]
-                        def patch = metadataAsList[2]
-
-                        // echo "major: ${major}"
-                        // echo "minor: ${minor}"
-                        // echo "patch: ${patch}"
+                        def major = versionAsList[0]
+                        def minor = versionAsList[1]
+                        def patch = versionAsList[2]
 
                         def incremented = Integer.parseInt(minor)
                         incremented++
 
-                        def newVersion = "${major}.${incremented}.${patch}"
+                        NEW_VERSION = "${major}.${incremented}.${patch}"
+                        NEW_IMAGE = "${ARTIFACT_REPO}:${ARTIFACT_REPO_PORT}/${appName}:${NEW_VERSION}"
 
-                        echo "newVersion: ${newVersion}"
+                        echo "NEW_IMAGE: ${NEW_IMAGE}"
                     }
                 }
             }
