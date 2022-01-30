@@ -66,7 +66,7 @@ pipeline {
                 script {
                     echo "committing version bump..."
                     withCredentials([usernamePassword(credentialsId: "github-creds-jFarrow02", usernameVariable: "USR", passwordVariable: "PWD")]) {
-                        def repoUrl "github.com/jFarrow02/node-app-ch08-exercise.git"
+                        def repoUrl = "github.com/jFarrow02/node-app-ch08-exercise.git"
                         sh "git config --global user.email 'jack.dempsey.farrow@gmail.com'"
                         sh "git config --global user.name 'Jenkins Admin'"
 
