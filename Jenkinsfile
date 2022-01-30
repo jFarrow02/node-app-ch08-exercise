@@ -61,12 +61,23 @@ pipeline {
         }
 
 
-        // stage("commit version increment") {
-        //     steps {
-        //         script {
-        //             echo "committing version increment..."
-        //         }
-        //     }
-        // }
+        stage("commit version bump") {
+            steps {
+                script {
+                    echo "committing version bump..."
+                    withCredentials([usernamePassword(credentialsId: "github-creds-jFarrow02", usernameVariable: "USR", passwordVariable: "P
+                    WD")]) {
+                        def repoUrl "github.com/jFarrow02/node-app-ch08-exercise.git"
+                        sh "git config --global user.email 'jack.dempsey.farrow@gmail.com'"
+                        sh "git config --global user.name 'Jenkins Admin'"
+
+                        sh "git remote set-url origin https://${USR}:${PWD}@${repoUrl}"
+                        sh "git add ."
+                        sh 'git commit -m"ci: version bump"'
+                        sh "git push origin HEAD:${BRANCH_NAME}"
+                    }
+                }
+            }
+        }
     }
 }
