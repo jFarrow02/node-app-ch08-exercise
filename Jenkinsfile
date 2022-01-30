@@ -47,31 +47,19 @@ pipeline {
             }
         }
 
-        // stage("test") {
-        //     steps {
-        //         script {
-        //             echo "running unit tests..."
-        //             sh "npm run test"
-        //         }
-        //     }
-        // }
+       stage("build image") {
+            steps {
+                script {
+                    echo "building image..."
+                    withCredentials([usernamePassword(credentialsId: "nexus-creds", usernameVariable: "USR", passwordVariable: "PWD")]) {
+                        sh "docker build -t $NEW_IMAGE ."
+                        sh "echo $PWD docker login -u $USR --password-stdin $ARTIFACT_REPO:$ARTIFACT_REPO_PORT"
+                        sh "docker push $NEW_IMAGE $ARFIACT_REPO"
+                    }
+                }
+            }
+        }
 
-        // stage("build image") {
-        //     steps {
-        //         script {
-        //             echo "building image..."
-        //             sh "npm package"
-        //         }
-        //     }
-        // }
-
-        // stage("push image to nexus") {
-        //     steps {
-        //         script {
-        //             echo "pushing image to nexus..."
-        //         }
-        //     }
-        // }
 
         // stage("commit version increment") {
         //     steps {
