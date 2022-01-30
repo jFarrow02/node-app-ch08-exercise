@@ -10,28 +10,20 @@ pipeline {
             }
         }
 
-        // stage("install dependencies") {
-        //     steps {
-        //         script {
-        //             echo "installing dependencies..."
-        //             dir("app") {
-        //                 sh 'npm install'
-        //                 sh "npm run test"
-        //             }
-                    
-        //         }
-        //     }
-        // }
-
         stage("test") {
             steps {
-                echo "running unit tests..."
-                dir("app") {
-                    sh "npm install"
-                    sh "npm run test"
+                script {
+                    dir("app") {
+                        echo "installing dependencies..."
+                        sh 'npm install'
+                        echo "running unit tests..."
+                        sh "npm run test"
+                    }
+                    
                 }
             }
         }
+
         // stage("test") {
         //     steps {
         //         script {
