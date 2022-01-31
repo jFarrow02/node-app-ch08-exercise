@@ -77,7 +77,8 @@ pipeline {
 
                         // sh "git remote set-url origin https://${USR}:${PWD}@github.com/jFarrow02/node-app-ch08-exercise.git"
                         // sh "git remote set-url origin https://github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
-                        sh "git remote set-url origin https://${USR}:${TKN}@github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
+                        // sh "git remote set-url origin https://${USR}:${TKN}@github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
+                        sh "git remote set-url origin https://github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
                         sh "git add ."
                         sh 'git commit -m"ci: version bump"'
                         sh "git push origin HEAD:${BRANCH_NAME}"
