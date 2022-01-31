@@ -71,7 +71,7 @@ pipeline {
                         string(credentialsId: "exercise08-accesstoken", variable: "TKN")
                         ]) {
                         // def repoUrl = "github.com/jFarrow02/node-app-ch08-exercise.git"
-                        def repoUrlWithAuth = "https://${USR}:${auth-token}@github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
+                        // def repoUrlWithAuth = "https://${USR}:${TKN}@github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
                         sh "git config --global user.email 'jack.dempsey.farrow@gmail.com'"
                         sh "git config --global user.name 'Jenkins Admin'"
 
