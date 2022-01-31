@@ -66,13 +66,18 @@ pipeline {
             steps {
                 script {
                     echo "committing version bump..."
-                    withCredentials([usernamePassword(credentialsId: "github-creds-jFarrow02", usernameVariable: "USR", passwordVariable: "PWD")]) {
-                        def repoUrl = "github.com/jFarrow02/node-app-ch08-exercise.git"
+                    withCredentials([
+                        usernamePassword(credentialsId: "github-creds-jFarrow02", usernameVariable: "USR", passwordVariable: "PWD"),
+                        string(credentialsId: "exercise08-accesstoken", variable: "TKN")
+                        ]) {
+                        // def repoUrl = "github.com/jFarrow02/node-app-ch08-exercise.git"
+                        def repoUrlWithAuth = "https://${USR}:${auth-token}@github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
                         sh "git config --global user.email 'jack.dempsey.farrow@gmail.com'"
                         sh "git config --global user.name 'Jenkins Admin'"
 
-                        sh "git remote set-url origin https://${USR}:${PWD}@github.com/jFarrow02/node-app-ch08-exercise.git"
+                        // sh "git remote set-url origin https://${USR}:${PWD}@github.com/jFarrow02/node-app-ch08-exercise.git"
                         // sh "git remote set-url origin https://github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
+                        sh "git remote set-url origin https://${USR}:${TKN}@github.com/${USR}/jFarrow02/node-app-ch08-exercise.git"
                         sh "git add ."
                         sh 'git commit -m"ci: version bump"'
                         sh "git push origin HEAD:${BRANCH_NAME}"
